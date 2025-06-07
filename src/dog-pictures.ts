@@ -13,3 +13,5 @@ export const dogPictures = {
   Cowardly,
   Dalmation,
 };
+
+export const defaultSelectedImage = dogPictures.BlueHeeler;
