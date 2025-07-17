@@ -1,1 +1,116 @@
-{"dogs":[{"name":"Nannie","image":"/assets/corgi.png","description":"inquisitively oof calm acupuncture whereas equatorial gosh effectuate","isFavorite":true,"id":0},{"name":"Brycen","image":"/assets/chihuahua.avif","description":"bottleful after baste obliterate putrid","isFavorite":false,"id":1},{"name":"Thurman","image":"/assets/boxer.png","description":"subtle though jade indeed before island aha","isFavorite":true,"id":2},{"name":"Orrin","image":"/assets/chihuahua.avif","description":"provided after despite till watcher","isFavorite":true,"id":3},{"name":"Lucie","image":"/assets/dalmation.png","description":"psst justly browsing all solid","isFavorite":false,"id":4},{"name":"Luella","image":"/assets/blue-heeler.png","description":"smoothly idolized naturally yum that till phew","isFavorite":false,"id":5},{"name":"Shannon","image":"/assets/cowardly.png","description":"invite insistent brr truthfully athwart bah straddle assassination","isFavorite":true,"id":6},{"name":"Imani","image":"/assets/dalmation.png","description":"rattle excluding skean on recovery","isFavorite":true,"id":7},{"name":"Danyka","image":"/assets/chihuahua.avif","description":"chillax daily sally however lest","isFavorite":true,"id":8},{"name":"Toby","image":"/assets/blue-heeler.png","description":"wildly forenenst rightfully till how","isFavorite":false,"id":9},{"name":"Tyson","image":"/assets/blue-heeler.png","description":"inequality maroon however nimble segregate","isFavorite":false,"id":10},{"name":"Eulalia","image":"/assets/boxer.png","description":"foolish rarely despite fooey frantically definitive jubilant dislike","isFavorite":true,"id":11},{"name":"Lawson","image":"/assets/cowardly.png","description":"uniform but wet cruelly knowledgeable","isFavorite":true,"id":12},{"name":"Cooper","image":"/assets/dalmation.png","description":"furthermore when righteously when handlebar breathe considering so","isFavorite":false,"id":13},{"name":"Melody","image":"/assets/chihuahua.avif","description":"demotivate above hmph exploit hatbox quaver these","isFavorite":false,"id":14},{"name":"Linda","image":"/assets/blue-heeler.png","description":"instead angelic kissingly easily apropos tempting crease","isFavorite":true,"id":15},{"name":"Dakota","image":"/assets/chihuahua.avif","description":"salad hopelessly loyally gah whoever","isFavorite":true,"id":16},{"name":"Stewart","image":"/assets/blue-heeler.png","description":"bad whoever obedient modulo investigation daily yum","isFavorite":true,"id":17},{"name":"Melyssa","image":"/assets/cowardly.png","description":"drat considering youthfully unfortunately whereas aside underline jealously","isFavorite":false,"id":18},{"name":"Korey","image":"/assets/chihuahua.avif","description":"loosely at bossy surprisingly friendly for well-lit seldom","isFavorite":false,"id":19}]}
+{
+  "dogs": [
+    {
+      "name": "Dave",
+      "image": "/assets/chihuahua.avif",
+      "description": "but woeful unlike instead woot inferior geez",
+      "isFavorite": true,
+      "id": 0
+    },
+    {
+      "name": "Creola",
+      "image": "/assets/dalmation.png",
+      "description": "enlighten redden hm kindly unto meanwhile before unwitting",
+      "isFavorite": false,
+      "id": 1
+    },
+    {
+      "name": "Allison",
+      "image": "/assets/corgi.png",
+      "description": "or uncomfortable abaft around scorpion socialise aboard",
+      "isFavorite": false,
+      "id": 2
+    },
+    {
+      "name": "Jordy",
+      "image": "/assets/blue-heeler.png",
+      "description": "um hush before barring gah",
+      "isFavorite": true,
+      "id": 3
+    },
+    {
+      "name": "Alta",
+      "image": "/assets/chihuahua.avif",
+      "description": "aha whether netball gad bare although ew",
+      "isFavorite": true,
+      "id": 4
+    },
+    {
+      "name": "Scot",
+      "image": "/assets/boxer.png",
+      "description": "through vivaciously unwieldy gee atop edible excerpt",
+      "isFavorite": false,
+      "id": 5
+    },
+    {
+      "name": "Nakia",
+      "image": "/assets/cowardly.png",
+      "description": "smell tomorrow drift muck glorious acidly eek immediately",
+      "isFavorite": false,
+      "id": 6
+    },
+    {
+      "name": "Herman",
+      "image": "/assets/chihuahua.avif",
+      "description": "above after reindeer where vastly rope amid icy",
+      "isFavorite": true,
+      "id": 7
+    },
+    {
+      "name": "Earnest",
+      "image": "/assets/boxer.png",
+      "description": "now advocate brooch tension active conceive tightly hepatitis",
+      "isFavorite": false,
+      "id": 8
+    },
+    {
+      "name": "Pearline",
+      "image": "/assets/blue-heeler.png",
+      "description": "samurai across duh eek attractive",
+      "isFavorite": false,
+      "id": 9
+    },
+    {
+      "name": "Gilda",
+      "image": "/assets/cowardly.png",
+      "description": "jagged outside gee likewise incidentally",
+      "isFavorite": false,
+      "id": 10
+    },
+    {
+      "name": "Angelina",
+      "image": "/assets/chihuahua.avif",
+      "description": "dame whereas tricky phooey meanwhile huzzah but quieten",
+      "isFavorite": true,
+      "id": 15
+    },
+    {
+      "name": "Genesis",
+      "image": "/assets/corgi.png",
+      "description": "known out age hive agonizing aw ready",
+      "isFavorite": true,
+      "id": 16
+    },
+    {
+      "name": "Sabina",
+      "image": "/assets/chihuahua.avif",
+      "description": "until drop geez carefree which along carelessly gosh",
+      "isFavorite": false,
+      "id": 17
+    },
+    {
+      "name": "Malinda",
+      "image": "/assets/boxer.png",
+      "description": "provided finally anchored ew tuck",
+      "isFavorite": false,
+      "id": 19
+    },
+    {
+      "name": "don",
+      "image": "/assets/blue-heeler.png",
+      "description": "a dog",
+      "isFavorite": true,
+      "id": 20
+    }
+  ]
+}

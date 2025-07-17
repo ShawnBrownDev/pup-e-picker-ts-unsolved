@@ -1,62 +1,89 @@
 import { Component } from "react";
-import { defaultSelectedImage, dogPictures } from "../dog-pictures";
-import { IFormProps } from "../types";
+import { dogPictures } from "../dog-pictures";
+import { Requests } from "../api";
+import toast from "react-hot-toast";
 
-export class ClassCreateDogForm extends Component<IFormProps> {
+type ClassCreateDogProps = {
+  refreshDogs: () => void;
+  isLoading: boolean;
+  setLoading: (isLoading: boolean) => void;
+};
+
+export class ClassCreateDogForm extends Component<ClassCreateDogProps> {
   state = {
     name: "",
     description: "",
-    image: defaultSelectedImage,
+    picture: dogPictures.BlueHeeler,
   };
 
+  handleInputChange = (name: string, value: string) => {
+    this.setState((prev) => ({ ...prev, [name]: value }));
+  };
+
+  handleSubmit = () => {
+    const { name, description, picture } = this.state;
+    const { refreshDogs, setLoading } = this.props;
+    const newDog = {
+      name,
+      description,
+      image: picture,
+      isFavorite: false,
+    };
+    setLoading(true);
+    Requests.postDog(newDog)
+      .then(() => {
+        refreshDogs();
+        this.setState({
+          name: "",
+          description: "",
+          picture: dogPictures.BlueHeeler,
+        });
+      })
+      .then(() => {
+        toast.success(`Dog Created: ${name}`);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   render() {
+    const { name, description, picture } = this.state;
+    const { isLoading } = this.props;
     return (
       <form
         action=""
         id="create-dog-form"
-        onSubmit={(event) => {
-          event.preventDefault();
-          this.props.addDog({
-            name: this.state.name,
-            image: this.state.image,
-            description: this.state.description,
-            isFavorite: false,
-          });
-          this.setState({
-            name: "",
-            description: "",
-            image: defaultSelectedImage,
-          });
+        onSubmit={(e) => {
+          e.preventDefault();
+          this.handleSubmit();
         }}
       >
         <h4>Create a New Dog</h4>
         <label htmlFor="name">Dog Name</label>
         <input
+          id="name"
           type="text"
-          value={this.state.name}
-          onChange={(event) => {
-            this.setState({ name: event.target.value });
-          }}
-          disabled={this.props.isLoading}
+          value={name}
+          onChange={(e) => this.handleInputChange("name", e.target.value)}
+          disabled={isLoading}
         />
         <label htmlFor="description">Dog Description</label>
         <textarea
-          name="dog-description"
-          id="dog-description"
+          id="description"
           cols={80}
           rows={10}
-          value={this.state.description}
-          onChange={(event) => {
-            this.setState({ description: event.target.value });
-          }}
-          disabled={this.props.isLoading}
+          value={description}
+          onChange={(e) =>
+            this.handleInputChange("description", e.target.value)
+          }
+          disabled={isLoading}
         />
         <label htmlFor="picture">Select an Image</label>
         <select
-          onChange={(event) => {
-            this.setState({ image: event.target.value });
-          }}
-          disabled={this.props.isLoading}
+          id="picture"
+          onChange={(e) => this.handleInputChange("picture", e.target.value)}
+          value={picture}
+          disabled={isLoading}
         >
           {Object.entries(dogPictures).map(([label, pictureValue]) => {
             return (
@@ -66,7 +93,7 @@ export class ClassCreateDogForm extends Component<IFormProps> {
             );
           })}
         </select>
-        <input type="submit" value="submit" disabled={this.props.isLoading} />
+        <input type="submit" value="submit" disabled={isLoading} />
       </form>
     );
   }

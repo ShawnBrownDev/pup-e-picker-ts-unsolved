@@ -1,44 +1,58 @@
-import { DogCard } from '../Shared/DogCard';
-import { IDisplayDogs } from '../types';
+import { DogCard } from "../Shared/DogCard";
+import { Dog } from "../types";
+import { Requests } from "../api";
 
-export const FunctionalDogs = ({
-  dogs,
-  deleteDog,
-  updateDog,
-  activeTab,
-  isLoading,
-}: IDisplayDogs) => {
+type FunctionalDogsProps = {
+  dogs: Dog[];
+  refreshDogs: () => void;
+  isLoading: boolean;
+  setLoading: (isLoading: boolean) => void;
+};
+
+export const FunctionalDogs = (props: FunctionalDogsProps) => {
+  const { dogs, refreshDogs, isLoading, setLoading } = props;
+  const { deleteDog, updateDog } = Requests;
+
+  const handleDeleteClick = (id: number) => {
+    setLoading(true);
+    deleteDog(id)
+      .then(() => {
+        refreshDogs();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleFavoriteClick = (id: number, isFavorite: boolean) => {
+    setLoading(true);
+    updateDog(id, !isFavorite)
+      .then(() => {
+        refreshDogs();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <>
-      {dogs
-        .filter((dog) => {
-          switch (activeTab) {
-            case 'favorited':
-              return dog.isFavorite;
-            case 'unfavorited':
-              return !dog.isFavorite;
-            case 'createDog':
-              return false;
-            case 'none':
-              return dog;
-          }
-        })
-        .map((dog) => (
+      {dogs.map((dog) => {
+        const { isFavorite } = dog;
+        const id = dog.id || 0;
+
+        return (
           <DogCard
-            key={dog.id}
             dog={dog}
-            onEmptyHeartClick={() => {
-              updateDog(dog.id, true);
-            }}
-            onHeartClick={() => {
-              updateDog(dog.id, false);
-            }}
-            onTrashIconClick={() => {
-              deleteDog(dog.id);
-            }}
+            key={id}
+            onTrashIconClick={() => handleDeleteClick(id)}
+            onHeartClick={() => handleFavoriteClick(id, isFavorite)}
+            onEmptyHeartClick={() => handleFavoriteClick(id, isFavorite)}
             isLoading={isLoading}
           />
-        ))}
+        );
+      })}
+      ;
     </>
   );
 };

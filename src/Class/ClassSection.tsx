@@ -1,66 +1,55 @@
-import { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { IClassSectionProps } from '../types';
+// you can use `ReactNode` to add a type to the children prop
+import { Component, ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { Dog, DogView } from "../types";
 
-export class ClassSection extends Component<IClassSectionProps> {
+type ClassSectionProps = {
+  children: ReactNode;
+  allDogs: Dog[];
+  view: string;
+  changeView: (newView: DogView) => void;
+};
+
+export class ClassSection extends Component<ClassSectionProps> {
   render() {
-    return (
-      <section id='main-section'>
-        <div className='container-header'>
-          <div className='container-label'>Dogs: </div>
+    const { children, view, changeView, allDogs } = this.props;
+    const favoriteCount = allDogs.filter((dog) => dog.isFavorite).length;
+    const unfavoriteCount = allDogs.filter((dog) => !dog.isFavorite).length;
 
-          <Link
-            to={'/functional'}
-            className='btn'
-          >
+    return (
+      <section id="main-section">
+        <div className="container-header">
+          <div className="container-label">Dogs: </div>
+
+          <Link to={"/functional"} className="btn">
             Change to Functional
           </Link>
 
-          <div className='selectors'>
+          <div className="selectors">
             {/* This should display the favorited count */}
             <div
-              className={`selector ${
-                this.props.activeTab === 'favorited' ? 'active' : ''
-              }`}
-              onClick={() => {
-                this.props.activeTab !== 'favorited'
-                  ? this.props.handleActiveTab('favorited')
-                  : this.props.handleActiveTab('none');
-              }}
+              className={`selector ${view === "favoriteDogs" && "active"}`}
+              onClick={() => changeView("favoriteDogs")}
             >
-              favorited ({' '}
-              {this.props.dogs.filter((dog) => dog.isFavorite).length} )
+              favorited ( {favoriteCount} )
             </div>
 
             {/* This should display the unfavorited count */}
             <div
-              className={`selector ${
-                this.props.activeTab === 'unfavorited' ? 'active' : ''
-              }`}
-              onClick={() => {
-                this.props.activeTab !== 'unfavorited'
-                  ? this.props.handleActiveTab('unfavorited')
-                  : this.props.handleActiveTab('none');
-              }}
+              className={`selector ${view === "unfavoriteDogs" && "active"}`}
+              onClick={() => changeView("unfavoriteDogs")}
             >
-              unfavorited ({' '}
-              {this.props.dogs.filter((dog) => !dog.isFavorite).length} )
+              unfavorited ( {unfavoriteCount} )
             </div>
             <div
-              className={`selector ${
-                this.props.activeTab === 'createDog' ? 'active' : ''
-              }`}
-              onClick={() => {
-                this.props.activeTab !== 'createDog'
-                  ? this.props.handleActiveTab('createDog')
-                  : this.props.handleActiveTab('none');
-              }}
+              className={`selector ${view === "createDog" && "active"}`}
+              onClick={() => changeView("createDog")}
             >
               create dog
             </div>
           </div>
         </div>
-        <div className='content-container'>{this.props.children}</div>
+        <div className="content-container">{children}</div>
       </section>
     );
   }

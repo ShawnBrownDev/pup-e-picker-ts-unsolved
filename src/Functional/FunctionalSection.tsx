@@ -1,61 +1,61 @@
-import { Link } from 'react-router-dom';
-import { IFunctionalSectionProps } from '../types';
+import { Dispatch, ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { Dog, DogView } from "../types";
 
-export const FunctionalSection = ({
-  children,
-  dogs,
-  activeTab,
-  setActiveTab,
-}: IFunctionalSectionProps) => {
+type FunctionalSectionProps = {
+  children: ReactNode;
+  allDogs: Dog[];
+  view: DogView;
+  setView: Dispatch<DogView>;
+};
+
+export const FunctionalSection = (props: FunctionalSectionProps) => {
+  const { children, allDogs, view, setView } = props;
+
+  const favoriteCount = allDogs.filter((dog) => dog.isFavorite).length;
+  const unfavoriteCount = allDogs.filter((dog) => !dog.isFavorite).length;
+
+  const changeView = (newView: DogView) => {
+    const nextView = newView === view ? "allDogs" : newView;
+    setView(nextView);
+  }
+
   return (
-    <section id='main-section'>
-      <div className='container-header'>
-        <div className='container-label'>Dogs: </div>
-        <Link
-          to={'/class'}
-          className='btn'
-        >
+    <section id="main-section">
+      <div className="container-header">
+        <div className="container-label">Dogs: </div>
+        <Link to={"/class"} className="btn">
           Change to Class
         </Link>
-        <div className='selectors'>
-          {/* This should display the favorited count */}
+        <div className="selectors">
           <div
-            className={`selector ${activeTab === 'favorited' ? 'active' : ''}`}
+            className={`selector ${view === "favoriteDogs" && "active"}`}
             onClick={() => {
-              activeTab !== 'favorited'
-                ? setActiveTab('favorited')
-                : setActiveTab('none');
+              changeView("favoriteDogs");
             }}
           >
-            favorited ( {dogs.filter((dog) => dog.isFavorite).length} )
+            favorited ( {favoriteCount} )
           </div>
 
-          {/* This should display the unfavorited count */}
           <div
-            className={`selector ${
-              activeTab === 'unfavorited' ? 'active' : ''
-            }`}
+            className={`selector ${view === "unfavoriteDogs" && "active"}`}
             onClick={() => {
-              activeTab !== 'unfavorited'
-                ? setActiveTab('unfavorited')
-                : setActiveTab('none');
+              changeView("unfavoriteDogs");
             }}
           >
-            unfavorited ( {dogs.filter((dog) => !dog.isFavorite).length} )
+            unfavorited ( {unfavoriteCount} )
           </div>
           <div
-            className={`selector ${activeTab === 'createDog' ? 'active' : ''}`}
+            className={`selector ${view === "createDog" && "active"}`}
             onClick={() => {
-              activeTab !== 'createDog'
-                ? setActiveTab('createDog')
-                : setActiveTab('none');
+              changeView("createDog");
             }}
           >
             create dog
           </div>
         </div>
       </div>
-      <div className='content-container'>{children}</div>
+      <div className="content-container">{children}</div>
     </section>
   );
 };

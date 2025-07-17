@@ -1,41 +1,60 @@
-import { DogCard } from '../Shared/DogCard';
-import { Component } from 'react';
-import { IDisplayDogs } from '../types';
+import { DogCard } from "../Shared/DogCard";
+import { Component } from "react";
+import { Requests } from "../api";
+import { Dog } from "../types";
 
-export class ClassDogs extends Component<IDisplayDogs> {
+type ClassDogsProps = {
+  dogs: Dog[];
+  refreshDogs: () => void;
+  isLoading: boolean;
+  setLoading: (isLoading: boolean) => void;
+};
+
+export class ClassDogs extends Component<ClassDogsProps> {
+  handleDeleteClick = (id: number) => {
+    const { setLoading, refreshDogs } = this.props;
+    setLoading(true);
+    Requests.deleteDog(id)
+      .then(() => {
+        refreshDogs();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  handleFavoriteClick = (id: number, isFavorite: boolean) => {
+    const { setLoading, refreshDogs } = this.props;
+    setLoading(true);
+    Requests.updateDog(id, !isFavorite)
+      .then(() => {
+        refreshDogs();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   render() {
+    const { dogs, isLoading } = this.props;
+
     return (
       <>
-        {this.props.dogs
-          .filter((dog) => {
-            switch (this.props.activeTab) {
-              case 'favorited':
-                return dog.isFavorite;
-              case 'unfavorited':
-                return !dog.isFavorite;
-              case 'createDog':
-                return false;
-              case 'none':
-                return dog;
-            }
-          })
-          .map((dog) => (
+        {dogs.map((dog) => {
+          const { isFavorite } = dog;
+          const id = dog.id || 0;
+
+          return (
             <DogCard
-              key={dog.id}
               dog={dog}
-              onEmptyHeartClick={() => {
-                this.props.updateDog(dog.id, true);
-              }}
-              onHeartClick={() => {
-                this.props.updateDog(dog.id, false);
-              }}
-              //insert delete method here
-              onTrashIconClick={() => {
-                this.props.deleteDog(dog.id);
-              }}
-              isLoading={this.props.isLoading}
+              key={id}
+              onTrashIconClick={() => this.handleDeleteClick(id)}
+              onHeartClick={() => this.handleFavoriteClick(id, isFavorite)}
+              onEmptyHeartClick={() => this.handleFavoriteClick(id, isFavorite)}
+              isLoading={isLoading}
             />
-          ))}
+          );
+        })}
       </>
     );
   }
